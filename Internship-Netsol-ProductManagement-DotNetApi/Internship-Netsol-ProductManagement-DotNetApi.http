@@ -1,0 +1,6 @@
+@Internship_Netsol_ProductManagement_DotNetApi_HostAddress = http://localhost:5005
+
+GET {{Internship_Netsol_ProductManagement_DotNetApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
