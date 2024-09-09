@@ -41,6 +41,7 @@ namespace Internship_Netsol_ProductManagement_DotNetApi
 
             app.UseHttpsRedirection();
 
+            app.UseCors(policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             app.UseAuthorization();
 
 

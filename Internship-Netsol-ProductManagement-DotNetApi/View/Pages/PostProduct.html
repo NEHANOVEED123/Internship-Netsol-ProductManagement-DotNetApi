@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Product Management</title>
+    <link rel="stylesheet" href="../Styles/FormStyle.css">
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="text">Product Management Form
+        </div>
+
+        <!-- Form to Create or Update Product -->
+        <form id="product-form" method="post" action="Create">
+            <div class="form-row">
+                <div class="input-data">
+                    <input type="text" id="Name">
+                    <div class="underline"></div>
+                    <label for="Name">Name</label>
+
+
+
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="input-data">
+                    <input type="number" id="Price">
+                    <div class="underline"></div>
+                    <label for="Price">Price</label>
+
+
+
+
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="input-data textarea">
+                    <textarea id="Description" rows="7" cols="80"></textarea>
+                    <div class="underline"></div>
+
+                    <br />
+                    <div class="underline"></div>
+                    <label for="">Write your Description</label>
+                    <br />
+
+                </div>
+            </div>
+
+            <div class="form-row submit-btn">
+                <div class="input-data">
+                    <div class="inner"></div>
+                    <input type="submit" value="Submit">
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- JavaScript to handle form submission -->
+    <script>
+        document.getElementById('product-form').addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            const product = {
+                Name: document.getElementById('Name').value,
+                Price: parseFloat(document.getElementById('Price').value),
+                Description: document.getElementById('Description').value
+            };
+
+            try {
+                const response = await fetch('https://localhost:7081/api/product', { // Correct URL
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(product)
+                });
+
+                if (response.ok) {
+                    alert('Product submitted successfully!');
+                } else {
+                    alert('Error submitting product.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while submitting the form.');
+            }
+        });
+    </script>
+</body>
+</html>
