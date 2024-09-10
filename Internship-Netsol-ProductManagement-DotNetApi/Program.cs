@@ -13,7 +13,7 @@ namespace Internship_Netsol_ProductManagement_DotNetApi
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers();//This line registers the controllers with the dependency injection (DI) container. Controllers are responsible for handling HTTP requests in an MVC pattern.
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -24,12 +24,12 @@ namespace Internship_Netsol_ProductManagement_DotNetApi
             });
 
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
-            builder.Services.AddControllers()//This line registers the controllers with the dependency injection (DI) container. Controllers are responsible for handling HTTP requests in an MVC pattern.
+            builder.Services.AddControllers()
             .AddNewtonsoftJson(options =>
             {
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
-
+            
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

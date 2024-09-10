@@ -13,7 +13,7 @@ using Internship_Netsol_ProductManagement_DotNetApi.FilterQuery;
 namespace Internship_Netsol_ProductManagement_DotNetApi.Controllers // Defines the namespace for the controller class, which is essential for organizing code.
 {
     [ApiController] // Specifies that this class is an API controller, which means it can handle HTTP requests.
-    [Route("api/product")] // Sets the base route for all actions within this controller, meaning all endpoints will start with "api/person".
+    [Route("api/product")] // Sets the base route for all actions within this controller, meaning all endpoints will start with "api/product".
 
 
     public class ProductController : ControllerBase // Inherits from ControllerBase, providing basic functionalities like returning responses.
@@ -46,19 +46,19 @@ namespace Internship_Netsol_ProductManagement_DotNetApi.Controllers // Defines t
 
 
         [HttpGet("{Id:int}")] // Specifies that this method responds to GET requests with an ID parameter in the URL.
-        public async Task<IActionResult> GetById([FromRoute] int Id) // Method to get a person by their ID.
+        public async Task<IActionResult> GetById([FromRoute] int Id) // Method to get a Product by their ID.
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var product = await _productRepo.GetByIdAsync(Id); // Finds the person with the given ID in the database.
-            if (product == null) // Checks if the person is not found.
+            var product = await _productRepo.GetByIdAsync(Id); // Finds the Product with the given ID in the database.
+            if (product == null) // Checks if the Product is not found.
             {
-                return NotFound(); // Returns a 404 Not Found response if the person does not exist.
+                return NotFound(); // Returns a 404 Not Found response if the Product does not exist.
             }
-            return Ok(product.ToProductDto()); // Returns the found person mapped to a DTO as a 200 OK response.
+            return Ok(product.ToProductDto()); // Returns the found Product mapped to a DTO as a 200 OK response.
         }
 
 

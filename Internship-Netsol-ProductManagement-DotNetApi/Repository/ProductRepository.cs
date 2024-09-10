@@ -32,16 +32,11 @@ namespace Internship_Netsol_ProductManagement_DotNetApi.Repository
 
         public async Task<Product?> DeleteAsync(int id)
         {
-            var productModel = await _context.Products
-                                            .FirstOrDefaultAsync(x => x.Id == id);
+            var productModel = await _context.Products.FirstOrDefaultAsync(x => x.Id == id);
             if (productModel == null)
             {
                 return null;
             }
-
-            // Remove the associated comments first
-
-            // Then remove the person
             _context.Products.Remove(productModel);
 
             await _context.SaveChangesAsync();

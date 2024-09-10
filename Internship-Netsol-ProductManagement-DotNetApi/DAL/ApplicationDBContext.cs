@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore; // Imports the Entity Framework Core library for working with databases.
-using Internship_Netsol_ProductManagement_DotNetApi.Models; // Imports the models, specifically the Person class.
+using Internship_Netsol_ProductManagement_DotNetApi.Models; // Imports the models, specifically the Product class.
 
 namespace Internship_Netsol_ProductManagement_DotNetApi.DAL // Defines the namespace for the data access layer.
 {
@@ -11,6 +11,6 @@ namespace Internship_Netsol_ProductManagement_DotNetApi.DAL // Defines the names
         }
 
 
-        public DbSet<Product> Products { get; set; } // Represents the "Comments" table in the database.
+        public DbSet<Product> Products { get; set; } // Represents the "Products" table in the database.
     }
 }
