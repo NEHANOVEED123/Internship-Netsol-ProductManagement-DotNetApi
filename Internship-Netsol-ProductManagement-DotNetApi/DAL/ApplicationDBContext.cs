@@ -12,5 +12,6 @@ namespace Internship_Netsol_ProductManagement_DotNetApi.DAL // Defines the names
 
 
         public DbSet<Product> Products { get; set; } // Represents the "Products" table in the database.
+        public DbSet<User> Users { get; set; }
     }
 }
