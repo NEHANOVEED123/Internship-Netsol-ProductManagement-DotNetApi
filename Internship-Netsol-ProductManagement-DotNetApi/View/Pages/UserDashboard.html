@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Navbar styling */
+        .navbar {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        /* Sidebar styling */
+        .sidebar {
+            width: 200px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background-color: #f4f4f4;
+            padding-top: 20px;
+        }
+
+            .sidebar a {
+                display: block;
+                color: #000;
+                padding: 10px;
+                text-decoration: none;
+                margin: 5px 0;
+            }
+
+                .sidebar a:hover {
+                    background-color: #ddd;
+                }
+
+        /* Main content area */
+        .main-content {
+            margin-left: 220px;
+            padding: 20px;
+        }
+
+            /* Add space between heading and buttons */
+            .main-content h2 {
+                margin-bottom: 20px;
+            }
+
+        /* Styling for buttons */
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .input-data {
+            margin: 10px;
+        }
+
+            .input-data a {
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #007BFF;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 5px;
+            }
+
+                .input-data a:hover {
+                    background-color: #0056b3;
+                }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <h1>Welcome to the User Dashboard</h1>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <a href="#">Dashboard</a>
+        <a href="Products.html">Products</a>
+        <a href="OrderManage.html">Orders</a>
+        <a href="#">Settings</a>
+        <a href="#">Logout</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h2 style="padding:30px">Product Management</h2>
+        
+        <hr/>
+        <div class="form-row" style="margin-top:50px;">
+           
+            <div class="input-data">
+                <a href="GetProductById.html">View a Product</a>
+            </div>
+            <div class="input-data">
+                <a href="PostProduct.html">Create Product</a>
+            </div>
+            <div class="input-data">
+                <a href="UpdateProduct.html">Update Product</a>
+            </div>
+            <div class="input-data">
+                <a href="DeleteProduct.html">Delete Products</a>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

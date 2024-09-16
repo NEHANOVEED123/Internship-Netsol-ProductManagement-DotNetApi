@@ -1,0 +1,146 @@
+﻿/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Container Style */
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading Style */
+.text {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Form Row Style */
+.form-row {
+    margin-bottom: 20px;
+}
+
+/* Input Data Style */
+.input-data {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+/* Label Style */
+label {
+    display: block;
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px; /* Space between label and input */
+    transition: all 0.3s ease;
+}
+
+/* Input Field Style */
+input[type="text"],
+input[type="number"],
+input[type="date"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #333;
+    transition: border-color 0.3s ease;
+}
+
+    /* Focus Effect for Input Fields */
+    input:focus,
+    textarea:focus,
+    select:focus {
+        border-color: #0056b3;
+        outline: none;
+    }
+
+/* Textarea Style */
+textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+/* Underline Effect */
+.underline {
+    height: 2px;
+    background-color: #0056b3;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    transition: width 0.3s ease;
+}
+
+/* Show Underline on Focus */
+input:focus + .underline,
+textarea:focus + .underline,
+select:focus + .underline {
+    width: 100%;
+}
+
+/* Error Message Style */
+.error-message {
+    color: #e74c3c;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+/* Submit Button Style */
+.submit-btn {
+    text-align: center;
+}
+
+/* Inner Wrapper for Button */
+.inner {
+    position: relative;
+}
+
+/* Button Style */
+input[type="submit"] {
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+    /* Button Hover Effect */
+    input[type="submit"]:hover {
+        background-color: #004494;
+    }
+
+/* Confirmation Message Style */
+.confirmation-message {
+    display: none;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+/* Success Message Style */
+.success-message {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+/* Error Message Style */
+.error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+}
