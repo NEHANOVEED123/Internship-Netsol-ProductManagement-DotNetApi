@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Internship_Netsol_ProductManagement_DotNetApi.DAL;
 using Internship_Netsol_ProductManagement_DotNetApi.Interfaces;
 using Internship_Netsol_ProductManagement_DotNetApi.Repository;
+using Internship_Netsol_ProductManagement_DotNetApi.BLL;
 
 namespace Internship_Netsol_ProductManagement_DotNetApi
 {
@@ -24,6 +25,12 @@ namespace Internship_Netsol_ProductManagement_DotNetApi
             });
 
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
+            builder.Services.AddScoped<IProductServices, ProductServices>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IUserServices, UserServices>();
+            builder.Services.AddScoped<ICustomizeOrderRepository, CustomizeOrderRepository>();
+            builder.Services.AddScoped<ICustomizeOrderServices, CustomizeOrderServices>();
+
             builder.Services.AddControllers()
             .AddNewtonsoftJson(options =>
             {

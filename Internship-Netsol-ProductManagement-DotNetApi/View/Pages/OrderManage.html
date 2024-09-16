@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Management</title>
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="../Styles/OrderStyle.css">
+</head>
+
+<body>
+    <!-- Main Content -->
+    <div class="main-content">
+        <h2>Order Management</h2>
+
+        <hr />
+
+        <div class="form-row">
+            <div class="input-data">
+                <a href="CreateOrder.html">Enter New Order</a>
+            </div>
+        </div>
+        <hr />
+        <div class="container">
+            <div class="text">Log of Customize Order</div>
+
+            <!-- Table Container for Horizontal Scrolling -->
+            <div id="order-table-container">
+                <table id="order-table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Frontend Pages</th>
+                            <th>Payment Status</th>
+                            <th>Payment Type</th>
+                            <th>Order Date</th>
+                            <th>Delivery Date</th>
+                            <th>Note</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Order rows will be dynamically inserted here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript to Fetch and Display Orders -->
+    <script>
+        document.addEventListener("DOMContentLoaded", async function () {
+            try {
+                const response = await fetch('https://localhost:7081/api/CustomizeOrder'); // Adjust the API endpoint if necessary
+                if (!response.ok) {
+                    throw new Error('Failed to fetch orders');
+                }
+
+                const orders = await response.json();
+                const orderTableBody = document.querySelector('#order-table tbody');
+                orderTableBody.innerHTML = ''; // Clear any previous content
+
+                // Iterate over orders and create table rows
+                orders.forEach(order => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                            <td>${order.id}</td>
+                            <td>${order.title}</td>
+                            <td>${order.description}</td>
+                            <td>${order.frontendPages}</td>
+                            <td>${order.paymentStatus}</td>
+                            <td>${order.paymentType}</td>
+                            <td>${new Date(order.orderDate).toLocaleDateString()}</td>
+                            <td>${new Date(order.deliveryDate).toLocaleDateString()}</td>
+                            <td>${order.note}</td>
+                        `;
+                    orderTableBody.appendChild(row);
+                });
+
+            } catch (error) {
+                console.error('Error:', error);
+                showError('An error occurred while fetching order data. Please try again later.');
+            }
+        });
+
+        // Function to display an error message in the table
+        function showError(message) {
+            const orderTableBody = document.querySelector('#order-table tbody');
+            orderTableBody.innerHTML = ''; // Clear any previous rows
+            const errorRow = document.createElement('tr');
+            errorRow.innerHTML = `<td colspan="9" style="text-align: center; color: red;">${message}</td>`;
+            orderTableBody.appendChild(errorRow);
+        }
+    </script>
+</body>
+</html>

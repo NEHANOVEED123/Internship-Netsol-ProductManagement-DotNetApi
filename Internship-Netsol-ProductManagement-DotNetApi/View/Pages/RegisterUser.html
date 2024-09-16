@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../Styles/FormStyle.css">
+    <title>User Registration</title>
+
+    <style>
+        .error-message {
+            color: red;
+            font-size: 0.9em;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="text">User Registration Form</div>
+
+        <!-- Form to Create or Register a User -->
+        <form id="registration-form" method="post" action="Create">
+            <div class="form-row">
+                <div class="input-data">
+                    <input type="text" id="Name" required>
+                    <div class="underline"></div>
+                    <label for="Name">Name</label>
+                    <span class="error-message" id="name-error">Name is required.</span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="input-data">
+                    <input type="email" id="Email" required>
+                    <div class="underline"></div>
+                    <label for="Email">Email</label>
+                    <span class="error-message" id="email-error">Invalid email address.</span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="input-data">
+                    <input type="password" id="Password" required>
+                    <div class="underline"></div>
+                    <label for="Password">Password</label>
+                    <span class="error-message" id="password-error">Password must be at least 8 characters long, and include a number and a special character.</span>
+                </div>
+            </div>
+
+            <div class="form-row submit-btn">
+                <div class="input-data">
+                    <input type="submit" value="Register">
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- JavaScript to handle form submission and validation -->
+    <script>
+        document.getElementById('registration-form').addEventListener('submit', async function (event) {
+            event.preventDefault();
+
+            // Clear previous error messages
+            document.querySelectorAll('.error-message').forEach(element => element.style.display = 'none');
+
+            // Form validation
+            const name = document.getElementById('Name').value;
+            const email = document.getElementById('Email').value;
+            const password = document.getElementById('Password').value;
+
+            const nameError = document.getElementById('name-error');
+            const emailError = document.getElementById('email-error');
+            const passwordError = document.getElementById('password-error');
+
+            let valid = true;
+
+            // Simple name validation
+            if (name.trim() === '') {
+                nameError.style.display = 'block';
+                valid = false;
+            }
+
+            // Basic email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                emailError.style.display = 'block';
+                valid = false;
+            }
+
+            // Password validation (at least 8 chars, 1 number, 1 special char)
+            const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z\d@$!%*?&]{8,}$/;
+            if (!passwordRegex.test(password)) {
+                passwordError.style.display = 'block';
+                valid = false;
+            }
+
+            if (!valid) {
+                return;
+            }
+
+            // Prepare the user data object
+            const user = {
+                Name: name,
+                Email: email,
+                Password: password
+            };
+
+            try {
+                // Disable the submit button to prevent multiple submissions
+                document.querySelector('input[type="submit"]').disabled = true;
+
+                const response = await fetch('https://localhost:7081/api/user/Create', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(user)
+                });
+
+                // Re-enable the submit button
+                document.querySelector('input[type="submit"]').disabled = false;
+
+                if (response.ok) {
+                    alert('Registration successful!');
+                    window.location.href = '../Pages/UserDashboard.html'; // Redirect to user dashboard
+                } else {
+                    const errorMessage = await response.text();
+                    alert(`Error during registration: ${errorMessage}`);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while registering.');
+            }
+        });
+    </script>
+</body>
+</html>

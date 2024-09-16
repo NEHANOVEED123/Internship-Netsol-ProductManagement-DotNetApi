@@ -79,11 +79,11 @@
                             // Create row for the fetched product
                             const row = document.createElement('tr');
                             row.innerHTML = `
-                                    <td>${product.id}</td>
-                                    <td>${product.name}</td>
-                                    <td>${product.price}</td>
-                                    <td>${product.description}</td>
-                                `;
+                                        <td>${product.id}</td>
+                                        <td>${product.name}</td>
+                                        <td>${product.price}</td>
+                                        <td>${product.description}</td>
+                                    `;
                             productTableBody.appendChild(row);
                         } else {
                             alert('Invalid ID! Error fetching product data.');

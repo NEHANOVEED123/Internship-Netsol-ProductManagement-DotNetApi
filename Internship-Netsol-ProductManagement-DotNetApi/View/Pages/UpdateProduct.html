@@ -8,10 +8,10 @@
 
 <body>
     <div class="container">
-        <div class="text">Product Management Form</div>
+        <div class="text">Product Update Form</div>
 
         <!-- Form to Create or Update Product -->
-        <form id="product-form" action="Update">
+        <form id="product-form" method="post">
 
             <!-- Input field for ProductId -->
             <div class="form-row">
@@ -83,6 +83,11 @@
 
                     if (response.ok) {
                         alert('Product updated successfully!');
+
+                        // Redirect to Products.html after a successful update
+                        setTimeout(() => {
+                            window.location.href = 'Products.html';
+                        }, 1000); // Delay to show alert message for 1 second
                     } else {
                         alert('Error updating product.');
                     }
