@@ -1,0 +1,134 @@
+﻿/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+h2 {
+    padding: 20px;
+    text-align: center;
+    color: #343a40;
+}
+
+/* Main content layout */
+.main-content {
+    margin: 20px auto;
+    max-width: 1200px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.input-data a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+    .input-data a:hover {
+        background-color: #0056b3;
+    }
+
+/* Table Styling */
+#order-table-container {
+    overflow-x: auto; /* Allow horizontal scrolling */
+}
+
+#order-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+    #order-table th, #order-table td {
+        padding: 12px 15px;
+        text-align: left;
+        border: 1px solid #ddd;
+        word-wrap: break-word; /* Wrap long words */
+    }
+
+    #order-table th {
+        background-color: #343a40;
+        color: white;
+    }
+
+    #order-table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+/* Footer container */
+.container {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.text {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #343a40;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .input-data a {
+        font-size: 14px;
+        padding: 8px 15px;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    #order-table th, #order-table td {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    /* Stack table rows on smaller screens */
+    #order-table, #order-table thead, #order-table tbody, #order-table th, #order-table td {
+        display: block;
+    }
+
+        #order-table thead {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+
+        #order-table tr {
+            border: 1px solid #ddd;
+            margin-bottom: 10px;
+            display: block;
+            padding: 10px;
+        }
+
+        #order-table td {
+            display: block;
+            text-align: right;
+            padding: 10px;
+            position: relative;
+            border: none;
+        }
+
+            #order-table td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 0;
+                width: 50%;
+                padding-right: 10px;
+                white-space: nowrap;
+                font-weight: bold;
+                text-align: left;
+            }
+}

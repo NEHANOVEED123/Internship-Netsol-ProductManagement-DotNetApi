@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login</title>
+    <link rel="stylesheet" href="../Styles/FormStyle.css">
+    <style>
+        /* Center align the text inside the container */
+        .container {
+            text-align: center;
+            max-width: 400px;
+            margin: auto;
+        }
+
+        /* Basic styles for the login form */
+        .underline {
+            border-bottom: 2px solid #ddd;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+            button:hover {
+                background-color: #45a049;
+            }
+
+        /* Error message styles */
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        /* Loader style */
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 4px solid #3498db;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: none;
+            margin: 10px auto;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="text">User LogIn</div>
+
+        <!-- Form to Authenticate User -->
+        <div id="login-form">
+            <label for="userEmail">Enter User Email:</label>
+            <input type="email" id="userEmail" placeholder="example@gmail.com" required />
+            <div class="underline"></div>
+
+            <label for="userPassword">Enter User Password:</label>
+            <input type="password" id="userPassword" placeholder="Create strong password" required />
+            <div class="underline"></div>
+
+            <div id="error-message" class="error-message"></div>
+
+            <!-- Loader -->
+            <div class="loader" id="loader"></div>
+
+            <button id="UserAuthentication">Login</button>
+        </div>
+    </div>
+
+    <!-- JavaScript for User Authentication -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const userAuthenticationBtn = document.getElementById('UserAuthentication');
+            const errorMessageDiv = document.getElementById('error-message');
+            const loader = document.getElementById('loader');
+
+            userAuthenticationBtn.addEventListener('click', async function () {
+                const userEmail = document.getElementById('userEmail').value;
+                const userPassword = document.getElementById('userPassword').value;
+
+                errorMessageDiv.textContent = '';  // Clear previous errors
+
+                if (validateForm(userEmail, userPassword)) {
+                    try {
+                        // Show loader and disable button
+                        loader.style.display = 'block';
+                        userAuthenticationBtn.disabled = true;
+
+                        const response = await fetch('https://localhost:7081/api/user/auth', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                email: userEmail,
+                                password: userPassword
+                            })
+                        });
+
+                        // Hide loader and enable button
+                        loader.style.display = 'none';
+                        userAuthenticationBtn.disabled = false;
+
+                        if (response.ok) {
+                            alert('Login successful!');
+                            window.location.href = "../Pages/UserDashboard.html"; // Redirect on successful login
+                        } else if (response.status === 401) {
+                            errorMessageDiv.textContent = 'Invalid email or password. Please try again.';
+                        } else {
+                            errorMessageDiv.textContent = 'An unexpected error occurred. Please try again later.';
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                        errorMessageDiv.textContent = 'Network error. Please check your connection and try again.';
+                        loader.style.display = 'none';
+                        userAuthenticationBtn.disabled = false;
+                    }
+                }
+            });
+
+            function validateForm(email, password) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                if (!emailRegex.test(email)) {
+                    errorMessageDiv.textContent = 'Please enter a valid email address.';
+                    return false;
+                }
+
+                if (password.length < 5) {
+                    errorMessageDiv.textContent = 'Password must be at least 8 characters long.';
+                    return false;
+                }
+
+                return true;
+            }
+        });
+    </script>
+</body>
+</html>
